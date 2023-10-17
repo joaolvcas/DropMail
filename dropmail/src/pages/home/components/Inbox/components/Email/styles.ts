@@ -5,7 +5,7 @@ export const View = styled.div`
 `;
 
 export const Header = styled.div`
-  padding: 21.5px;
+  height: 6.7vh;
   background-color: #f8f8f8;
   border-bottom: 1px solid #d9d9d9;
 `;

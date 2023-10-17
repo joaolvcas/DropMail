@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { NotificatonButton, NotificatonText } from "./styles";
+import notificationSrc from "../../assets/img/notification.png";
+import { NotificatonButton, NotificatonIcon, NotificatonText } from "./styles";
 
 const NotificationButton: React.FC = (): JSX.Element => {
   const [notificationPermission, setNotificationPermission] = useState(
@@ -15,9 +16,10 @@ const NotificationButton: React.FC = (): JSX.Element => {
   return (
     <NotificatonButton onClick={requestNotificationPermission}>
       <NotificatonText>
-        {notificationPermission === "granted"
-          ? "Notificações ativadas"
-          : "Ativar notificações"}
+        {notificationPermission !== "granted" && "Ativar notificações"}
+        {notificationPermission === "granted" && (
+          <NotificatonIcon src={notificationSrc} />
+        )}
       </NotificatonText>
     </NotificatonButton>
   );

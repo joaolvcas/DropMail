@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 export const Scroll = styled.div`
-  height: 270px;
+  height: 100%;
   overflow-y: auto;
-
   /* Estilize a barra de rolagem */
   &::-webkit-scrollbar {
     width: 6px;

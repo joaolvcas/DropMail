@@ -6,13 +6,13 @@ export const View = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 271.5px;
+  height: 47.3vh;
   background-color: #f8f8f8;
 `;
 
 export const BoxMail = styled.div`
   width: 98%;
-  height: 271.5px;
+  height: 54vh;
   border-radius: 2px;
   background-color: #fff;
   border: 1px solid #d9d9d9;

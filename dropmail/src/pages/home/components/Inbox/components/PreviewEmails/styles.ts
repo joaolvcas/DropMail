@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const View = styled.div`
   width: 30%;
-  height: 50.5vh;
+  height: 54vh;
   border-right: 1px solid #d9d9d9;
 `;
 
