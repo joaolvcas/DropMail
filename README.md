@@ -46,3 +46,5 @@ Inside the foder project, just run:
 ```bash
 yarn setup
 ```
+#### 🎥 More about the project
+<a>https://www.loom.com/share/0b4b4884f88d4164a3177268b7586141?sid=a7fbf666-c1ef-4554-b46e-0b9a4e8935fa</a>
