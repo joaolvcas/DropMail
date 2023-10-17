@@ -1,20 +1,17 @@
 import React, { useState } from "react";
-import { useLazyQuery } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import { useSpring, animated } from "react-spring";
 import refreshSrc from "../../../../../../assets/svg/refetch.svg";
+import syncSrc from "../../../../../../assets/svg/sync.svg";
 import Timer from "../../../../../../components/Timer/circleAnimation";
-import {
-  ButtonRefresh,
-  RefreshIcon,
-  RefreshWrapper,
-  Text,
-  View,
-} from "./styles";
+import { ButtonRefresh, RefreshWrapper, Text, View } from "./styles";
 import { FETCH_MAILS } from "../../../../../../graphql/Querys/fetchMails";
 import { useRecoilState } from "recoil";
-import { mails, session } from "../../../../../../recoil/atoms";
+import { currentMail, mails, session } from "../../../../../../recoil/atoms";
 import sendNotification from "../../../../../../helpers/sendNotification";
 import { TimerWrapper } from "../Input/styles";
+import { INTRODUCE_SESSION_MUTATION } from "../../../../../../graphql/Mutations/getSession";
+import { getSessionSchemas } from "../../../../../../types/getSessionSchemas";
 
 const Refresh: React.FC = (): JSX.Element => {
   const [timeLeft, setTimeLeft] = useState(15);
@@ -22,8 +19,13 @@ const Refresh: React.FC = (): JSX.Element => {
   const [springProps, setSpringProps] = useSpring(() => ({
     transform: "rotate(0deg)",
   }));
+  const [Watchedmails, setWatchedMails] = useRecoilState(currentMail);
   const [actualSession, setActualSession] = useRecoilState(session);
   const [currentMails, setCurrentMails] = useRecoilState(mails);
+  const [introduceSession, { loading }] = useMutation(
+    INTRODUCE_SESSION_MUTATION,
+    {}
+  );
   const [fetch] = useLazyQuery(FETCH_MAILS, {
     variables: { id: actualSession?.id },
     onCompleted: (res) => {
@@ -45,6 +47,27 @@ const Refresh: React.FC = (): JSX.Element => {
       setIsRotated(false);
       setSpringProps({ transform: "rotate(0deg)" });
     }, 1000);
+  };
+
+  const handleNewEmail = async () => {
+    setWatchedMails(null);
+    setCurrentMails(null);
+    setActualSession(null);
+    try {
+      await introduceSession({
+        onCompleted: (res) => {
+          const session: getSessionSchemas = {
+            id: res?.introduceSession.id,
+            expiresAt: res?.introduceSession.expiresAt,
+            email: res?.introduceSession.addresses[0].address,
+          };
+          setActualSession(session);
+          localStorage.setItem("@tempmail:session", JSON.stringify(session));
+        },
+      });
+    } catch (error) {
+      console.error("Erro na mutação:", error);
+    }
   };
 
   const handleRefresh = () => fetch().then(() => setTimeLeft(15));
@@ -77,6 +100,14 @@ const Refresh: React.FC = (): JSX.Element => {
           />
         </ButtonRefresh>
       </RefreshWrapper>
+      <ButtonRefresh
+        onClick={() => {
+          handleNewEmail();
+        }}
+      >
+        <Text>Gerar e-mail</Text>
+        <animated.img src={syncSrc} alt="Sync Icon" />
+      </ButtonRefresh>
     </View>
   );
 };
