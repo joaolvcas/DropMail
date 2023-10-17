@@ -7,6 +7,7 @@ export const View = styled.div`
   align-items: center;
   width: 100%;
   height: 47.3vh;
+  border-bottom-right-radius: 8px;
   background-color: #f8f8f8;
 `;
 

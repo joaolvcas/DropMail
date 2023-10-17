@@ -15,7 +15,7 @@ const PreviewEmail: React.FC = (): JSX.Element => {
   return (
     <View>
       <Header>
-        <Text>Inbox</Text>
+        <Text>Entrada</Text>
       </Header>
       <ScrollView>
         {currentMails?.map<JSX.Element>((mail, index) => {

@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
-export const WrapperInput = styled.div``;
+export const WrapperInput = styled.div`
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+`;
 
 export const Label = styled.text`
   font-size: 12px;
@@ -15,6 +22,10 @@ export const EmailView = styled.div`
   width: 400px;
   height: 32px;
   margin: 4px 0;
+  border-radius: 100px;
+  @media (max-width: 700px) {
+    max-width: 85%;
+  }
 `;
 
 export const Email = styled.div`
@@ -36,11 +47,13 @@ export const CopyBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20%;
+  width: 16%;
   height: 32px;
   border-left: 1px solid #d9d9d9;
   transition: background-color 0.3s;
   cursor: pointer;
+  border-top-right-radius: 200px;
+  border-bottom-right-radius: 200px;
   &:hover {
     background-color: #42a28d;
     color: #fff;
@@ -48,11 +61,17 @@ export const CopyBox = styled.div`
 `;
 
 export const CopyText = styled.text`
-  font-size: 14px;
+  font-size: 100%;
   color: #d9d9d9;
 `;
 
 export const CopyIcon = styled.img`
   width: 18px;
   height: 18px;
+`;
+
+export const TimerWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

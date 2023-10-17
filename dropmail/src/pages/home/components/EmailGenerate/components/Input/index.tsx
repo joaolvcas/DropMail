@@ -12,7 +12,6 @@ import {
   TextEmail,
   WrapperInput,
 } from "./styles";
-import sendNotification from "../../../../../../helpers/sendNotification";
 
 type Props = {
   loading: boolean;
@@ -32,19 +31,14 @@ const Input: React.FC<Props> = ({ loading, email }): JSX.Element => {
 
   return (
     <WrapperInput>
-      <Label>Your temporary email address</Label>
+      <Label>Seu endereço de e-mail temporário</Label>
       <EmailView>
         <Email>
           <TextEmail>{email}</TextEmail>
           <Loading loading={loading} />
         </Email>
         <CopyBox onClick={handleCopyText}>
-          {!isCopied && (
-            <>
-              <CopyIcon src={copySrc} alt="copy text icon" />
-              <CopyText>Copy</CopyText>
-            </>
-          )}
+          {!isCopied && <CopyIcon src={copySrc} alt="copy text icon" />}
           {isCopied && <CopyIcon src={copiedSrc} alt="text copied" />}
         </CopyBox>
       </EmailView>

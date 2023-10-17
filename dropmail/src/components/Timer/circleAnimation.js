@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 const CircleTimer = styled.div`
@@ -34,9 +34,7 @@ const View = styled.div`
   line-height: 1;
 `;
 
-const Timer = ({ handleRefresh }) => {
-  const [timeLeft, setTimeLeft] = useState(15);
-
+const Timer = ({ handleRefresh, timeLeft, setTimeLeft }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (timeLeft > 0) {

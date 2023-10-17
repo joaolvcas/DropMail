@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLazyQuery } from "@apollo/client";
 import refreshSrc from "../../../../../../assets/svg/refetch.svg";
 import Timer from "../../../../../../components/Timer/circleAnimation";
-import { Icon, RefreshIcon, RefreshWrapper, Text, View } from "./styles";
+import {
+  ButtonRefresh,
+  RefreshIcon,
+  RefreshWrapper,
+  Text,
+  View,
+} from "./styles";
 import { FETCH_MAILS } from "../../../../../../graphql/Querys/fetchMails";
 import { useRecoilState } from "recoil";
 import { mails, session } from "../../../../../../recoil/atoms";
 import sendNotification from "../../../../../../helpers/sendNotification";
+import { TimerWrapper } from "../Input/styles";
 
 const Refresh: React.FC = (): JSX.Element => {
+  const [timeLeft, setTimeLeft] = useState(15);
   const [actualSession, setActualSession] = useRecoilState(session);
   const [currentMails, setCurrentMails] = useRecoilState(mails);
   const [fetch] = useLazyQuery(FETCH_MAILS, {
@@ -25,17 +33,23 @@ const Refresh: React.FC = (): JSX.Element => {
     nextFetchPolicy: "no-cache",
   });
 
-  const handleRefresh = () => fetch();
+  const handleRefresh = () => fetch().then(() => setTimeLeft(15));
 
   return (
     <View>
-      <Text>Autorefresh in</Text>
+      <TimerWrapper>
+        <Text>Autorefresh em</Text>
+        <Timer
+          handleRefresh={handleRefresh}
+          timeLeft={timeLeft}
+          setTimeLeft={setTimeLeft}
+        />
+      </TimerWrapper>
       <RefreshWrapper>
-        <Timer handleRefresh={handleRefresh} />
-        <Text>Refresh</Text>
-        <Icon onClick={handleRefresh}>
+        <ButtonRefresh onClick={handleRefresh}>
+          <Text>Atualizar</Text>
           <RefreshIcon src={refreshSrc} alt="Refresh Icon" />
-        </Icon>
+        </ButtonRefresh>
       </RefreshWrapper>
     </View>
   );
