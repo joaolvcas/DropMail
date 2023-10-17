@@ -16,6 +16,7 @@ export const BoxMail = styled.div`
   border-radius: 2px;
   background-color: #fff;
   border: 1px solid #d9d9d9;
+  margin: 4px 8px 8px;
 `;
 
 export const BoxTitleMail = styled.text`
@@ -28,4 +29,12 @@ export const BoxTitleMail = styled.text`
 
 export const TitleMail = styled.text`
   font-weight: bold;
+`;
+
+export const BoxText = styled.div`
+  padding: 12px;
+`;
+
+export const Text = styled.text`
+  font-size: 12px;
 `;

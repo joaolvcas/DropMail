@@ -22,4 +22,7 @@ export const Description = styled.text`
 
 export const Text = styled.text`
   font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;

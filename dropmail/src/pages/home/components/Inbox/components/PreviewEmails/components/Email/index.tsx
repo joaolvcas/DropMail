@@ -1,12 +1,18 @@
 import React from "react";
+import { fetchMailsSchemas } from "../../../../../../../../types/fetchMailsSchemas";
 import { Description, Text, Title, View } from "./styles";
 
-const Email: React.FC = (): JSX.Element => {
+type Props = {
+  mail: fetchMailsSchemas;
+  onClick: (selectedMail: fetchMailsSchemas) => void;
+};
+
+const Email: React.FC<Props> = ({ mail, onClick }): JSX.Element => {
   return (
-    <View>
-      <Title>Hello</Title>
-      <Description>Welcome</Description>
-      <Text>Your temp e-mail address is ready...</Text>
+    <View onClick={() => onClick(mail)}>
+      <Title>{mail.headerSubject}</Title>
+      <Description>{mail.fromAddr}</Description>
+      <Text>{mail.text}</Text>
     </View>
   );
 };

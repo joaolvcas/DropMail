@@ -26,6 +26,25 @@ export const Icon = styled.div`
   width: 26px;
   height: 26px;
   border-radius: 50px;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: #42a28d;
+    cursor: pointer;
+  }
 `;
 
 export const RefreshIcon = styled.img``;
+
+export const CircleProgress = styled.div`
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: conic-gradient(gray 0% 0%, gray 50% 50%, green 50% 100%);
+  animation: fill 15s linear infinite;
+  transform: rotate(-90deg);
+  margin: 10px;
+  display: inline-block;
+  text-align: center;
+  line-height: 100px;
+  font-size: 20px;
+`;
