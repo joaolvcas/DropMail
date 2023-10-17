@@ -47,3 +47,4 @@ Inside the foder project, just run:
 yarn setup
 ```
 #### 🎥 More about the project
+<a>https://www.loom.com/share/0b4b4884f88d4164a3177268b7586141?sid=443c8cee-2049-47d1-814b-5366aeada8c3</a>
