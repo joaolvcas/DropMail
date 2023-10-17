@@ -33,8 +33,6 @@ export const Icon = styled.div`
   }
 `;
 
-export const RefreshIcon = styled.img``;
-
 export const CircleProgress = styled.div`
   width: 100px;
   height: 100px;
@@ -63,4 +61,10 @@ export const ButtonRefresh = styled.div`
     background-color: #42a28d;
     cursor: pointer;
   }
+`;
+
+export const RefreshIcon = styled.img<{ rotate: boolean }>`
+  cursor: pointer;
+  transition: transform 1s;
+  transform: ${(props) => (props.rotate ? "rotate(360deg)" : "rotate(0deg")};
 `;

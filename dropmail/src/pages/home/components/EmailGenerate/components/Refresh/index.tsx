@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLazyQuery } from "@apollo/client";
+import { useSpring, animated } from "react-spring";
 import refreshSrc from "../../../../../../assets/svg/refetch.svg";
 import Timer from "../../../../../../components/Timer/circleAnimation";
 import {
@@ -17,6 +18,10 @@ import { TimerWrapper } from "../Input/styles";
 
 const Refresh: React.FC = (): JSX.Element => {
   const [timeLeft, setTimeLeft] = useState(15);
+  const [isRotated, setIsRotated] = React.useState(false);
+  const [springProps, setSpringProps] = useSpring(() => ({
+    transform: "rotate(0deg)",
+  }));
   const [actualSession, setActualSession] = useRecoilState(session);
   const [currentMails, setCurrentMails] = useRecoilState(mails);
   const [fetch] = useLazyQuery(FETCH_MAILS, {
@@ -33,6 +38,15 @@ const Refresh: React.FC = (): JSX.Element => {
     nextFetchPolicy: "no-cache",
   });
 
+  const handleRotate = () => {
+    setIsRotated(true);
+    setSpringProps({ transform: "rotate(360deg)" });
+    setTimeout(() => {
+      setIsRotated(false);
+      setSpringProps({ transform: "rotate(0deg)" });
+    }, 1000);
+  };
+
   const handleRefresh = () => fetch().then(() => setTimeLeft(15));
 
   return (
@@ -46,9 +60,21 @@ const Refresh: React.FC = (): JSX.Element => {
         />
       </TimerWrapper>
       <RefreshWrapper>
-        <ButtonRefresh onClick={handleRefresh}>
+        <ButtonRefresh
+          onClick={() => {
+            handleRefresh();
+            handleRotate();
+          }}
+        >
           <Text>Atualizar</Text>
-          <RefreshIcon src={refreshSrc} alt="Refresh Icon" />
+          <animated.img
+            src={refreshSrc}
+            alt="Refresh Icon"
+            style={{
+              cursor: "pointer",
+              transform: springProps.transform,
+            }}
+          />
         </ButtonRefresh>
       </RefreshWrapper>
     </View>
