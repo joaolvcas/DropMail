@@ -5,6 +5,9 @@ export const View = styled.div`
   align-items: center;
   gap: 16px;
   padding: 20px 0;
+  @media (max-width: 500px) {
+    flex-direction: column;
+  }
 `;
 
 export const Text = styled.text`

@@ -7,6 +7,9 @@ export const WrapperInput = styled.div`
     align-items: center;
     justify-content: center;
   }
+  @media (max-width: 500px) {
+    max-width: 95%;
+  }
 `;
 
 export const Label = styled.text`
